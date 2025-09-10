@@ -9,9 +9,11 @@ async function registerUser(e) {
         }
         const response = await axios.post('/user/signup', signupDetails);
         console.log(response);
+        alert("User registered successfully");
         e.target.reset();
 
     } catch (error) {
         console.log(error);
+        alert(error.response.data.error);
     }
 }
