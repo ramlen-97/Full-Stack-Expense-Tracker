@@ -3,7 +3,7 @@ const User = require('../models/user');
 
 const getSignupPage = (req, res) => {
     try {
-        res.sendFile(path.join(__dirname, '../views/signup.html'));
+        res.sendFile(path.join(__dirname, '../public/views/signup.html'));
 
     } catch (error) {
         console.log(error);
