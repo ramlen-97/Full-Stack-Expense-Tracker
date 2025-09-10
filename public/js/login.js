@@ -7,11 +7,11 @@ async function loginUser(e) {
         }
         const response = await axios.post('/user/login', loginDetails);
         console.log(response);
-        alert("User logged in successfully");
+        alert(response.data.message);
         e.target.reset();
     }
     catch (error) {
         console.log(error);
-        alert(error.response.data.error);
+        alert(error.response.data.message);
     }
 }
