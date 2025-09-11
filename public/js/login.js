@@ -1,3 +1,10 @@
+
+function showErrorMessage(error) {
+    console.log(error);
+    document.getElementById('err').textContent = error.response?.data.message ? `${error.response.data.message}` : 'Something went wrong! Please try again.';
+    document.addEventListener('click', () => document.getElementById('err').textContent = "", { once: true });
+}
+
 async function loginUser(e) {
     e.preventDefault();
     try {
@@ -11,7 +18,30 @@ async function loginUser(e) {
         e.target.reset();
     }
     catch (error) {
-        console.log(error);
-        alert(error.response.data.message);
+        showErrorMessage(error);
     }
+}
+
+async function signupUser(e) {
+    e.preventDefault();
+    try {
+        const signupDetails = {
+            name: e.target.name.value,
+            email: e.target.email.value,
+            password: e.target.password.value
+        }
+        const response = await axios.post('/user/signup', signupDetails);
+        console.log(response);
+        alert(response.data.message);
+        e.target.reset();
+
+    } catch (error) {
+        showErrorMessage(error);
+    }
+}
+
+function togglePassword(e) {
+    e.target.classList.toggle('fa-eye');
+    const inputPasswordElement = document.getElementById('password');
+    inputPasswordElement.type = inputPasswordElement.type === 'password' ? 'text' : 'password';
 }

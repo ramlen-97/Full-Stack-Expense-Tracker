@@ -8,7 +8,7 @@ const getSignupPage = (req, res) => {
 
     } catch (error) {
         console.log(error,error.message);
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Something went wrong. Please try again' });
     }
 }
 
@@ -17,8 +17,8 @@ const getLoginPage = (req, res) => {
         res.sendFile(path.join(__dirname, '../public/views/login.html'));
 
     } catch (error) {
-        console.log(error,error.message);
-        res.status(500).json({ message: error.message });
+        console.log(error, error.message);
+        res.status(500).json({ message: 'Something went wrong. Please try again' });
     }
 }
 
@@ -42,8 +42,8 @@ const addUser = async (req, res) => {
         })
     }
     catch (error) {
-        console.log(error,error.message);
-        res.status(500).json({ message: error.message });
+        console.log(error, error.message);
+        res.status(500).json({ message: 'Something went wrong. Please try again'});
     }
 }
 
@@ -57,28 +57,28 @@ const loginUser = async (req, res) => {
         console.log(user);
         // If user not found
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'User not found. Please sign up!' });
         }
         // If password does not match
         bcrypt.compare(password, user.password, (err, result) => {
-            if(err){
+            if (err) {
                 throw new Error();
             }
             if (result) {
-                res.status(200).json({message:'User logged in successfully'});
+                res.status(200).json({ message: 'User logged in successfully' });
             } else {
-                res.status(401).json({message:'Incorrect password. Please try again!'});
+                res.status(401).json({ message: 'Incorrect password. Please try again!' });
             }
         })
     } catch (error) {
         console.log(error, error.message);
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Something went wrong. Please try again' });
     }
 }
 
 module.exports = {
     getSignupPage,
-    addUser,
     getLoginPage,
+    addUser, 
     loginUser
 }
