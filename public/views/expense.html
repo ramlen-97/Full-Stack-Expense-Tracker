@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color:  #f8f8f8;
+        }
+
+        div {
+            text-align: center;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Expense Tracker</h1>
+    <div>
+        <form onsubmit="handleFormSubmit(event)">
+            <label for="amount">Choose expense amount</label>
+            <input type="number" name="amount" id="amount">
+            <label for="description">Choose description</label>
+            <input type="text" name="description" id="description">
+            <label for="category">Choose a category</label>
+            <select id=category>
+                <option value="Movie">Movie</option>
+                <option value="Grocery">Grocery</option>
+                <option value="Bills">Bills</option>
+                <option value="Fuel">Fuel</option>
+                <option value="Vacation">on vacation</option>
+                <option value="Others">Others</option>
+            </select>
+            <button type="submit">Add Expense</button>
+        </form>
+    </div>
+
+    <div>
+        <ul id="expense-list"></ul>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js"></script>
+    <script src="/js/expense.js"></script>
+</body>
+
+</html>

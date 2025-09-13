@@ -13,9 +13,9 @@ async function loginUser(e) {
             password: e.target.password.value
         }
         const response = await axios.post('/user/login', loginDetails);
-        console.log(response);
         alert(response.data.message);
-        e.target.reset();
+        window.location.href = "../expense";
+
     }
     catch (error) {
         showErrorMessage(error);
@@ -33,7 +33,8 @@ async function signupUser(e) {
         const response = await axios.post('/user/signup', signupDetails);
         console.log(response);
         alert(response.data.message);
-        e.target.reset();
+        window.location.href = "../expense";
+
 
     } catch (error) {
         showErrorMessage(error);
