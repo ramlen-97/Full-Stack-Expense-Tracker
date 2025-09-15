@@ -5,8 +5,9 @@ document.addEventListener('DOMContentLoaded', initialize);
 
 async function initialize() {
     try {
-        const response = await axios.get('expense/all');
-        console.log(response);
+        const token = getToken();
+        const response = await axios.get('expense/all', { headers: { "Authorization": token } });
+        // console.log(response);
         for (let item of response.data) {
             displayExpense(item);
         }
@@ -18,6 +19,7 @@ async function initialize() {
 async function handleFormSubmit(e) {
     e.preventDefault();
     try {
+        const token = getToken();
         const expenseObj = {
             amount: e.target.amount.value,
             description: e.target.description.value,
@@ -27,10 +29,10 @@ async function handleFormSubmit(e) {
         let response;
 
         if (isEdit) {
-            response = await axios.put(`expense/${editId}`, expenseObj);
+            response = await axios.put(`expense/${editId}`, expenseObj, { headers: { "Authorization": token } });
             document.querySelector('button[type=submit]').textContent = 'Add Expense';
         } else {
-            response = await axios.post('expense', expenseObj);
+            response = await axios.post('expense', expenseObj, { headers: { "Authorization": token } });
         }
         displayExpense(response.data);
         e.target.reset();
@@ -78,9 +80,9 @@ async function displayExpense(expense) {
 
 async function deleteExpense(e) {
     try {
+        const token = getToken();
         const id = e.target.parentElement.id;
-        const response = await axios.delete(`expense/${id}`);
-        e.target.parentElement.remove();
+        const response = await axios.delete(`expense/${id}`, { headers: { "Authorization": token } });
         if (id == editId) {
             editId = null;
             isEdit = false;
@@ -90,5 +92,12 @@ async function deleteExpense(e) {
     } catch (error) {
         console.log(error);
     }
+}
 
+function getToken() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = "../views/login.html";
+    }
+    return token;
 }

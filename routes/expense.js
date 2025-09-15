@@ -1,5 +1,7 @@
 const express=require('express');
 const expenseController=require('../controllers/expense');
+const userAuthentication=require('../middleware/auth');
+
 const router=express.Router();
 
 
@@ -7,16 +9,16 @@ const router=express.Router();
 router.get('/',expenseController.getExpesnePage);
 
 // Fetch all expenses
-router.get('/all',expenseController.getAllExpenses);
+router.get('/all',userAuthentication,expenseController.getAllExpenses);
 
 // Add new expense
-router.post('/',expenseController.addNewExpense);
+router.post('/',userAuthentication,expenseController.addNewExpense);
 
 // Delete a expense
-router.delete('/:id',expenseController.deleteExpense);
+router.delete('/:id',userAuthentication,expenseController.deleteExpense);
 
 // Edit an Expense
-router.put('/:id',expenseController.updateExpense);
+router.put('/:id',userAuthentication,expenseController.updateExpense);
 
 module.exports=router;
 

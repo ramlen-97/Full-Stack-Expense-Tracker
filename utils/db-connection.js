@@ -1,11 +1,11 @@
-const Sequelize=require('sequelize');
+const Sequelize = require('sequelize');
 
-const sequelize=new Sequelize('expense-tracker','root','Ramlen@97',{
-    dialect:'mysql',
-    host:'localhost'
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
+    dialect: 'mysql',
+    host: process.env.DB_HOST
 });
 
-(async()=>{
+(async () => {
     try {
         await sequelize.authenticate();
         console.log("Connection to db has been created");
@@ -14,4 +14,4 @@ const sequelize=new Sequelize('expense-tracker','root','Ramlen@97',{
     }
 })();
 
-module.exports=sequelize;
+module.exports = sequelize;

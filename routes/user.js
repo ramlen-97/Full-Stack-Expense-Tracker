@@ -6,7 +6,7 @@ router.get('/signup',userController.getSignupPage)
 
 router.get('/login',userController.getLoginPage);
 
-router.post('/signup',userController.addUser);
+router.post('/signup',userController.addUserPostSignup);
 
 router.post('/login',userController.loginUser);
 

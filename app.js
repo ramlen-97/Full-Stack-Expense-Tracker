@@ -1,8 +1,10 @@
+require('dotenv').config();
 const express = require('express');
-
 const db = require('./utils/db-connection');
 const userRoutes = require('./routes/user');
 const expenseRoutes=require('./routes/expense')
+
+require('./models');
 
 const app = express();
 
@@ -18,7 +20,7 @@ app.use('/', (req, res) => {
 
 
 db.sync().then(() => {
-    app.listen(3000, () => {
+    app.listen(process.env.PORT, () => {
         console.log("Server is running");
     })
 }).catch((error) => {
