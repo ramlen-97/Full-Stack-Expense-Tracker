@@ -5,7 +5,7 @@ const getExpesnePage = (req, res) => {
     try {
         res.sendFile(path.join(__dirname, "../public/views/expense.html"))
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).json({ message: 'Some fields are misisng!' });
     }
 }
@@ -15,7 +15,7 @@ const getAllExpenses = async (req, res) => {
         const expenses = await req.user.getExpenses();
         res.status(200).json(expenses);
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).json({ message: 'Something went wrong.Try again!' })
     }
 }
@@ -28,7 +28,7 @@ const addNewExpense = async (req, res) => {
         const expense = await req.user.createExpense(req.body);
         res.status(201).json(expense);
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).json({ message: 'Something went wrong.Try again!' })
     }
 }
@@ -43,7 +43,7 @@ const deleteExpense = async (req, res) => {
         await expense.destroy();
         res.status(200).json({ message: 'Expense deleted successfully' });
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).json({ message: 'Something went wrong.Try again!' })
     }
 }
@@ -59,7 +59,7 @@ const updateExpense = async (req, res) => {
         await expense.save();
         res.status(200).json(expense);
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).json({ message: 'Something went wrong.Try again!' })
     }
 }

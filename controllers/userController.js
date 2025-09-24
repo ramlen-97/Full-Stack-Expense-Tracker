@@ -42,7 +42,7 @@ const addUserPostSignup = async (req, res) => {
         })
     }
     catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).json({ message: 'Something went wrong. Please try again' });
     }
 }
@@ -71,7 +71,7 @@ const loginUser = async (req, res) => {
             }
         })
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).json({ message: 'Something went wrong. Please try again' });
     }
 }

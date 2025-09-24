@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
     <style>
         body {
             background-color:  #f8f8f8;
@@ -12,6 +13,7 @@
 
         div {
             text-align: center;
+            padding: 2px;
         }
 
         li {
@@ -27,6 +29,11 @@
 
 <body>
     <h1>Expense Tracker</h1>
+    <div>
+        <div>
+        <button  id="premium-btn">Go Premium</button>
+      </div>
+    </div>
     <div>
         <form onsubmit="handleFormSubmit(event)">
             <label for="amount">Choose expense amount</label>

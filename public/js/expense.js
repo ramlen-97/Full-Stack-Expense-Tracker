@@ -1,7 +1,33 @@
 let isEdit = false;
 let editId = null;
 
+const cashfree = Cashfree({
+    mode: "sandbox"
+});
+
 document.addEventListener('DOMContentLoaded', initialize);
+
+document.getElementById('premium-btn').addEventListener('click', async () => {
+    try {
+        const token = getToken();
+
+        // Fetch payment session Id from backend
+        const response = await axios.post('purchase/pay', null,{ headers: { "Authorization": token } });
+        const { paymentSessionId } = response.data;
+
+        //Initialize checkout options
+        let checkoutOptions = {
+            paymentSessionId: paymentSessionId,
+            redirectTarget: "_self",
+        };
+
+        //start the checkout process
+        await cashfree.checkout(checkoutOptions);
+        
+    } catch (error) {
+        console.log(error);
+    }
+})
 
 async function initialize() {
     try {
@@ -101,3 +127,4 @@ function getToken() {
     }
     return token;
 }
+

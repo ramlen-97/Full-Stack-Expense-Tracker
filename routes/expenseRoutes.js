@@ -1,5 +1,5 @@
 const express=require('express');
-const expenseController=require('../controllers/expense');
+const expenseController=require('../controllers/expenseController');
 const userAuthentication=require('../middleware/auth');
 
 const router=express.Router();

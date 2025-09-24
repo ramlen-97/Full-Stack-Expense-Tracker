@@ -12,7 +12,7 @@ const authenticate=async(req,res,next)=>{
         next();
     } catch (error) {
         res.status(401).json({message: "User not authorized" });
-        console.log('User not authorised',error);
+        console.log('User not authorised. Error:',error.message);
     }
 }
 
